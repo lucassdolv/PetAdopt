@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Spacer(),
             Center(
-              child: Text("Select your location and simply search"),
+              child: Text("Select your profile and simply search"),
             ),
             Center(
               child: Text("for pets near you"),
