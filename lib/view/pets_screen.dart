@@ -11,7 +11,7 @@ class PetsScreen extends StatelessWidget {
         body: Column(
           children: [
             TextField(
-              decoration: InputDecoration(hintText: "Pesquisar categoria:"),
+              decoration: InputDecoration(hintText: "Pesquisar Pet:"),
             ),
             SingleChildScrollView(
               child: Column(
