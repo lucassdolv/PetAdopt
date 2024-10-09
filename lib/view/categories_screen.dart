@@ -8,34 +8,103 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Row(
-              children: [
-                ElevatedButton(
-                    onPressed: () {}, child: Text("Adicionar para adoção")),
-                ElevatedButton(
-                    onPressed: () {},
-                    child: Row(
-                      children: [Text("Perfil"), Icon(Icons.person)],
-                    ))
-              ],
-            ),
-            TextField(
-              decoration: InputDecoration(hintText: "Pesquisar categoria:"),
-            ),
-            SingleChildScrollView(
-              //caso seja adicionado mais categorias futuramente
-              child: Column(
+        appBar: AppBar(
+          title: const Text("Categorias"),
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              // Botões no topo (Adicionar e Perfil)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CardCategories(),
-                  CardCategories(),
-                  CardCategories(),
-                  CardCategories(),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Adicionar para adoção",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    child: Row(
+                      children: const [
+                        Text(
+                          "Perfil",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        SizedBox(
+                            width:
+                                5), // Pequeno espaçamento entre texto e ícone
+                        Icon(
+                          Icons.person,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            )
-          ],
+              const SizedBox(height: 20),
+              // Campo de pesquisa de categoria
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "Pesquisar categoria:",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(
+                      color: Colors.black,
+                      width: 1,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(
+                      color: Colors.black,
+                      width: 1.5,
+                    ),
+                  ),
+                  prefixIcon: const Icon(Icons.search, color: Colors.black),
+                ),
+              ),
+              const SizedBox(height: 20),
+              // GridView para organizar os cards em duas colunas
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // Dois cards por linha
+                    crossAxisSpacing: 5, // Espaçamento horizontal
+                    mainAxisSpacing: 10, // Espaçamento vertical
+                    childAspectRatio:
+                        0.83, // Proporção dos cards (altura x largura)
+                  ),
+                  itemCount: 6, // Número de cards
+                  itemBuilder: (context, index) {
+                    return const CardCategories();
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

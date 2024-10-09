@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pet_adopt/view/categories_screen.dart';
+import 'package:pet_adopt/view/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -15,27 +17,35 @@ class LoginScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment:
+                CrossAxisAlignment.start, // Mantém alinhamento à esquerda
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.chevron_left, color: Colors.black),
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent, // Fundo transparente
-                    shadowColor: Colors.transparent, // Remove a sombra
-                    elevation: 0, // Remove a elevação
-                    padding: EdgeInsets.zero, // Remove padding
-                  ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const HomeScreen()));
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.chevron_left, color: Colors.black),
+                    SizedBox(width: 5),
+                    Text(
+                      "Voltar",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent, // Fundo transparente
+                  shadowColor: Colors.transparent, // Remove a sombra
+                  elevation: 0, // Remove a elevação
+                  padding: EdgeInsets.zero, // Remove padding
                 ),
               ),
-              Spacer(),
+              Spacer(
+                flex: 4,
+              ),
               SizedBox(
                 width: double.infinity,
                 child: TextField(
@@ -70,17 +80,22 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Spacer(),
+              Spacer(
+                flex: 1,
+              ),
               // Estilo atualizado para os botões
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CategoriesScreen()));
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black, // Fundo preto
                       padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(30), // Bordas arredondadas
@@ -94,12 +109,13 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Spacer(),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black, // Fundo preto
                       padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(30), // Bordas arredondadas
@@ -115,7 +131,9 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Spacer(),
+              Spacer(
+                flex: 4,
+              ),
             ],
           ),
         ),
