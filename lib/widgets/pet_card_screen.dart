@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pet_adopt/models/Dog_model.dart';
 import 'package:pet_adopt/view/pet_desc_screen.dart';
 
 class PetCardScreen extends StatelessWidget {
-  const PetCardScreen({super.key});
+  const PetCardScreen({
+    super.key,
+  required this.dogs});
+  final List<DogModel> dogs;
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +35,15 @@ class PetCardScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          // Título do card
-          const Text(
-            "Animal",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          // dogs
+          // .map((dog) => 
+          // Text(dog.name + "," + dog.age.toString(),
+          //   style: TextStyle(
+          //     fontSize: 16,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
+          // ),
           const SizedBox(
               height: 8), // Adicionando espaçamento entre o texto e o botão
           // Botão estilizado

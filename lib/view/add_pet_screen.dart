@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:pet_adopt/models/Dog_model.dart';
 
 class AddPetScreen extends StatelessWidget {
-  const AddPetScreen({super.key});
+  AddPetScreen({super.key});
+  TextEditingController nameController = TextEditingController();
+  TextEditingController breedController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    List<DogModel> dogs = [];
+
+    void salvarInfo() {
+      dogs.add(DogModel(
+          age: int.tryParse(ageController.text) ?? 0,
+          breed: breedController.text,
+          description: descriptionController.text,
+          name: nameController.text,
+          gender: genderController.text,
+          weight: double.tryParse(weightController.text) ?? 0));
+    }
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Adicionar Pet para adoção"),
           centerTitle: true,
-          automaticallyImplyLeading: false, // Remove o botão de voltar padrão
+          automaticallyImplyLeading: false,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -34,10 +53,10 @@ class AddPetScreen extends StatelessWidget {
                   ],
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent, // Fundo transparente
-                  shadowColor: Colors.transparent, // Remove a sombra
-                  elevation: 0, // Remove elevação
-                  padding: EdgeInsets.zero, // Remove padding
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
                 ),
               ),
               const Spacer(flex: 2),
@@ -45,6 +64,7 @@ class AddPetScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: TextField(
+                  controller: nameController, // Controlador do campo
                   decoration: InputDecoration(
                     hintText: "Digite o nome do Pet...",
                     border: OutlineInputBorder(
@@ -62,9 +82,10 @@ class AddPetScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black, // Fundo preto
+                    backgroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -83,6 +104,7 @@ class AddPetScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: TextField(
+                  controller: breedController, // Controlador do campo
                   decoration: InputDecoration(
                     hintText: "Digite a raça do Pet...",
                     border: OutlineInputBorder(
@@ -100,6 +122,8 @@ class AddPetScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: TextField(
+                  keyboardType: TextInputType.number,
+                  controller: ageController, // Controlador do campo
                   decoration: InputDecoration(
                     hintText: "Digite a idade do Pet...",
                     border: OutlineInputBorder(
@@ -113,10 +137,11 @@ class AddPetScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              // Campo Idade do Pet
+              // Campo Sexo do Pet
               SizedBox(
                 width: double.infinity,
                 child: TextField(
+                  controller: genderController, // Controlador do campo
                   decoration: InputDecoration(
                     hintText: "Digite o sexo do Pet...",
                     border: OutlineInputBorder(
@@ -134,6 +159,8 @@ class AddPetScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: TextField(
+                  keyboardType: TextInputType.number,
+                  controller: weightController, // Controlador do campo
                   decoration: InputDecoration(
                     hintText: "Digite o peso do Pet...",
                     border: OutlineInputBorder(
@@ -151,6 +178,7 @@ class AddPetScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: TextField(
+                  controller: descriptionController, // Controlador do campo
                   decoration: InputDecoration(
                     hintText: "Descreva seu Pet, manias, curiosidades...",
                     border: OutlineInputBorder(
@@ -170,8 +198,8 @@ class AddPetScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Lógica para adicionar o pet
-                  },
+                    salvarInfo();
+                  }, // Chama a função ao pressionar
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(vertical: 15),

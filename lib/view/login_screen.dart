@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_adopt/view/cadastro_screen.dart';
 import 'package:pet_adopt/view/categories_screen.dart';
 import 'package:pet_adopt/view/home_screen.dart';
 
@@ -111,7 +112,10 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Spacer(),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CadastroScreen()));
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black, // Fundo preto
                       padding:

@@ -107,7 +107,7 @@ class PetsScreen extends StatelessWidget {
                   ),
                   itemCount: 6, // Número de cards
                   itemBuilder: (context, index) {
-                    return const PetCardScreen();
+                    // return const PetCardScreen();
                   },
                 ),
               ),
