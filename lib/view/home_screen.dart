@@ -19,8 +19,13 @@ class HomeScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                        MaterialPageRoute(builder: (context) => const LoginScreen()));
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    elevation: 0,
+                  ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -38,20 +43,15 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    elevation: 0,
-                  ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Image.asset(
                 "assets/images/HomeDog.png",
                 height: 250,
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 "Ready to make a",
                 style: TextStyle(
                   fontSize: 28,
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              Text(
+              const Text(
                 "new friend?",
                 style: TextStyle(
                   fontSize: 28,
@@ -67,8 +67,8 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 "Select your profile and simply search",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -76,15 +76,15 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              Text(
+              const Text(
                 "for pets near you.",
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -92,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 50,
                     vertical: 20,
                   ),
@@ -100,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Get Started",
                   style: TextStyle(
                     fontSize: 18,
@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
             ],
           ),
         ),

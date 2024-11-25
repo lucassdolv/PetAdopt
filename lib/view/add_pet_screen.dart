@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_adopt/models/Dog_model.dart';
 
 class AddPetScreen extends StatelessWidget {
   AddPetScreen({super.key});
@@ -12,17 +11,17 @@ class AddPetScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<DogModel> dogs = [];
+    // List<DogModel> dogs = [];
 
-    void salvarInfo() {
-      dogs.add(DogModel(
-          age: int.tryParse(ageController.text) ?? 0,
-          breed: breedController.text,
-          description: descriptionController.text,
-          name: nameController.text,
-          gender: genderController.text,
-          weight: double.tryParse(weightController.text) ?? 0));
-    }
+    // void salvarInfo() {
+    //   dogs.add(DogModel(
+    //       age: int.tryParse(ageController.text) ?? 0,
+    //       breed: breedController.text,
+    //       description: descriptionController.text,
+    //       name: nameController.text,
+    //       gender: genderController.text,
+    //       weight: double.tryParse(weightController.text) ?? 0));
+    // }
 
     return SafeArea(
       child: Scaffold(
@@ -41,6 +40,12 @@ class AddPetScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop(); // Voltar à tela anterior
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
+                ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: const [
@@ -51,12 +56,6 @@ class AddPetScreen extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                     ),
                   ],
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  elevation: 0,
-                  padding: EdgeInsets.zero,
                 ),
               ),
               const Spacer(flex: 2),
@@ -198,7 +197,7 @@ class AddPetScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    salvarInfo();
+                    // salvarInfo();
                   }, // Chama a função ao pressionar
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,

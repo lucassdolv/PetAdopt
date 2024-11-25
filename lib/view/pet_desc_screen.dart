@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pet_adopt/model/pet_model.dart';
 
 class PetDescScreen extends StatelessWidget {
-  const PetDescScreen({super.key});
+  final PetModel dog;
 
+  const PetDescScreen({super.key, required this.dog});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -17,16 +19,16 @@ class PetDescScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  elevation: 0,
+                ),
                 child: Row(
                   children: [
                     Icon(Icons.chevron_left, color: Colors.black),
                     Text("Voltar")
                   ],
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  elevation: 0,
                 ),
               ),
               // Imagem ocupando uma proporção menor da tela
@@ -40,8 +42,8 @@ class PetDescScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               // Nome do animal centralizado e em negrito
-              Center(
-                child: const Text(
+              const Center(
+                child: Text(
                   "Nome do Animal",
                   style: TextStyle(
                     fontSize: 20,
@@ -62,8 +64,8 @@ class PetDescScreen extends StatelessWidget {
                       color: Colors.lightBlue.shade50,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         Text(
                           "Idade",
                           style: TextStyle(
@@ -89,8 +91,8 @@ class PetDescScreen extends StatelessWidget {
                       color: Colors.lightBlue.shade50,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         Text(
                           "Peso",
                           style: TextStyle(
@@ -116,8 +118,8 @@ class PetDescScreen extends StatelessWidget {
                       color: Colors.lightBlue.shade50,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         Text(
                           "Sexo",
                           style: TextStyle(

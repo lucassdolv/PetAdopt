@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:pet_adopt/view/add_pet_screen.dart';
-import 'package:pet_adopt/view/profile_screen.dart';
+import 'package:pet_adopt/controller/pet_controller.dart';
 import 'package:pet_adopt/widgets/pet_card_screen.dart';
+import 'package:pet_adopt/model/pet_model.dart';
 
-class PetsScreen extends StatelessWidget {
+class PetsScreen extends StatefulWidget {
   const PetsScreen({super.key});
+
+  @override
+  _PetsScreenState createState() => _PetsScreenState();
+}
+
+class _PetsScreenState extends State<PetsScreen> {
+  late Future<List<PetModel>> pets;
+
+  @override
+  void initState() {
+    super.initState();
+    pets = PetController().fetchPets();  // Chama a função para buscar os pets
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,59 +32,8 @@ class PetsScreen extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              // Botões no topo (Adicionar e Perfil)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => AddPetScreen()));
-                    },
-                    child: const Text(
-                      "Adicionar para adoção",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ProfileScreen()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    child: Row(
-                      children: const [
-                        Text(
-                          "Perfil",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        SizedBox(
-                            width:
-                                5), // Pequeno espaçamento entre texto e ícone
-                        Icon(
-                          Icons.person,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              // Aqui você pode adicionar os botões para Adicionar e Perfil
+
               const SizedBox(height: 20),
               // Campo de pesquisa de pet
               TextField(
@@ -97,17 +59,30 @@ class PetsScreen extends StatelessWidget {
               const SizedBox(height: 20),
               // Lista de pets
               Expanded(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Dois cards por linha
-                    crossAxisSpacing: 5, // Espaçamento horizontal
-                    mainAxisSpacing: 10, // Espaçamento vertical
-                    childAspectRatio:
-                        0.83, // Proporção dos cards (altura x largura)
-                  ),
-                  itemCount: 6, // Número de cards
-                  itemBuilder: (context, index) {
-                    // return const PetCardScreen();
+                child: FutureBuilder<List<PetModel>>(
+                  future: pets,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Erro: ${snapshot.error}'));
+                    } else if (snapshot.hasData) {
+                      List<PetModel> petList = snapshot.data!;
+                      return GridView.builder(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, 
+                          crossAxisSpacing: 5, 
+                          mainAxisSpacing: 10, 
+                          childAspectRatio: 0.83,
+                        ),
+                        itemCount: petList.length,
+                        itemBuilder: (context, index) {
+                          return PetCardScreen(dog: petList[index]); // Passa o pet individual
+                        },
+                      );
+                    } else {
+                      return const Center(child: Text('Nenhum pet encontrado.'));
+                    }
                   },
                 ),
               ),
