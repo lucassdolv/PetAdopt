@@ -68,7 +68,6 @@ class AddPetScreen extends StatelessWidget {
                         weight: double.parse(weightController.text),
                         color: colorController.text,
                         images: [imageController.text],
-                        token: "seu_token_aqui",
                       );
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Pet cadastrado com sucesso!')),

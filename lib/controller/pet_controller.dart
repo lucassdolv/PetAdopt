@@ -1,11 +1,16 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:pet_adopt/model/pet_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../model/pet_model.dart';
 
 class PetController {
   static const String baseUrl = 'https://pet-adopt-dq32j.ondigitalocean.app/pet';
 
-  // Função para buscar os pets da API
+  Future<String?> _getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('auth_token'); // Recupera o token salvo
+  }
+
   Future<List<PetModel>> fetchPets() async {
     final response = await http.get(Uri.parse('$baseUrl/pets'));
 
@@ -18,15 +23,16 @@ class PetController {
     }
   }
 
-  // Função para adicionar um novo pet
   Future<void> addPet({
     required String name,
     required int age,
     required double weight,
     required String color,
     required List<String> images,
-    required String token,
   }) async {
+    final token = await _getToken();
+    if (token == null) throw Exception('Token não encontrado. Faça login novamente.');
+
     final response = await http.post(
       Uri.parse('$baseUrl/create'),
       headers: {

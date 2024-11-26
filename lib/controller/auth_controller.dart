@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../model/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController {
   Future<String?> loginUser(String email, String password) async {
@@ -15,9 +15,15 @@ class AuthController {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        return data['token']; // Retorna o token de autenticação
+        String token = data['token'];
+        
+        // Salvar o token localmente
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('auth_token', token);
+
+        return token; // Retorna o token de autenticação
       } else {
-        return null; // Se falhar
+        return null; // Login falhou
       }
     } catch (e) {
       print('Erro ao fazer login: $e');
@@ -26,6 +32,7 @@ class AuthController {
   }
 
   Future<void> logoutUser() async {
-    // Implementação para logout (remover token, por exemplo)
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('auth_token'); // Remove o token ao fazer logout
   }
 }
