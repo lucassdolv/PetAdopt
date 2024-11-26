@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_adopt/controller/auth_controller.dart';
 import 'package:pet_adopt/view/cadastro_screen.dart';
-import 'package:pet_adopt/view/categories_screen.dart';
 import 'package:pet_adopt/view/home_screen.dart';
 import 'package:pet_adopt/view/pets_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Importando SharedPreferences
@@ -35,8 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Login bem-sucedido!")),
         );
-
-        // Redirecionando para a tela de categorias
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const PetsScreen()),
         );

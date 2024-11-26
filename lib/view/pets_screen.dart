@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_adopt/controller/pet_controller.dart';
+import 'package:pet_adopt/view/add_pet_screen.dart';
+import 'package:pet_adopt/view/profile_screen.dart';
 import 'package:pet_adopt/widgets/pet_card_screen.dart';
 import 'package:pet_adopt/model/pet_model.dart';
 
@@ -16,7 +18,7 @@ class _PetsScreenState extends State<PetsScreen> {
   @override
   void initState() {
     super.initState();
-    pets = PetController().fetchPets();  // Chama a função para buscar os pets
+    pets = PetController().fetchPets();
   }
 
   @override
@@ -32,10 +34,59 @@ class _PetsScreenState extends State<PetsScreen> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              // Aqui você pode adicionar os botões para Adicionar e Perfil
-
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => AddPetScreen()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    child: const Text(
+                      "Adicionar para adoção",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ProfileScreen()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    child: const Row(
+                      children: [
+                        Text(
+                          "Perfil",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        SizedBox(
+                            width:
+                                5),
+                        Icon(
+                          Icons.person,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 20),
-              // Campo de pesquisa de pet
               TextField(
                 decoration: InputDecoration(
                   hintText: "Pesquisar Pet:",
@@ -57,7 +108,6 @@ class _PetsScreenState extends State<PetsScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              // Lista de pets
               Expanded(
                 child: FutureBuilder<List<PetModel>>(
                   future: pets,
@@ -69,19 +119,21 @@ class _PetsScreenState extends State<PetsScreen> {
                     } else if (snapshot.hasData) {
                       List<PetModel> petList = snapshot.data!;
                       return GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, 
-                          crossAxisSpacing: 5, 
-                          mainAxisSpacing: 10, 
-                          childAspectRatio: 0.83,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
+                          childAspectRatio: 0.785,
                         ),
                         itemCount: petList.length,
                         itemBuilder: (context, index) {
-                          return PetCardScreen(dog: petList[index]); // Passa o pet individual
+                          return PetCardScreen(dog: petList[index]);
                         },
                       );
                     } else {
-                      return const Center(child: Text('Nenhum pet encontrado.'));
+                      return const Center(
+                          child: Text('Nenhum pet encontrado.'));
                     }
                   },
                 ),

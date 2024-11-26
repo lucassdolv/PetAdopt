@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pet_adopt/view/login_screen.dart';
-import '../controller/user_controller.dart'; // Use UserController para o cadastro
+import '../controller/user_controller.dart';
 import '../model/user_model.dart';
 
-class CadastroScreen extends StatefulWidget {  // Definindo a classe CadastroScreen
+class CadastroScreen extends StatefulWidget {  
   const CadastroScreen({super.key});
 
   @override
@@ -40,12 +40,10 @@ class _CadastroScreenState extends State<CadastroScreen> {
       SnackBar(content: Text(message)),
     );
 
-    // Se o cadastro for bem-sucedido, redireciona para a tela de login
     if (message == 'Usuário cadastrado com sucesso!') {
-      // Substitua "LoginScreen" pela sua tela de login
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),  // Tela de login
+        MaterialPageRoute(builder: (context) => LoginScreen()),  
       );
     }
   }

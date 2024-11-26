@@ -7,38 +7,43 @@ class PetController {
 
   // Função para buscar os pets da API
   Future<List<PetModel>> fetchPets() async {
-  final response = await http.get(Uri.parse('$baseUrl/pets'));
+    final response = await http.get(Uri.parse('$baseUrl/pets'));
 
-  if (response.statusCode == 200) {
-    Map<String, dynamic> data = json.decode(response.body);
-    List<dynamic> petsList = data['pets']; // A chave 'pets' contém a lista de pets
-    return petsList.map((json) => PetModel.fromJson(json)).toList();
-  } else {
-    throw Exception('Falha ao carregar os pets');
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = json.decode(response.body);
+      List<dynamic> petsList = data['pets'];
+      return petsList.map((json) => PetModel.fromJson(json)).toList();
+    } else {
+      throw Exception('Falha ao carregar os pets');
+    }
   }
-}
 
   // Função para adicionar um novo pet
-  Future<bool> addPet(PetModel pet, String token) async {
+  Future<void> addPet({
+    required String name,
+    required int age,
+    required double weight,
+    required String color,
+    required List<String> images,
+    required String token,
+  }) async {
     final response = await http.post(
       Uri.parse('$baseUrl/create'),
       headers: {
-        'Authorization': 'Bearer $token',  // Adiciona o token para autenticação
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
       body: json.encode({
-        'name': pet.name,
-        'age': pet.age,
-        'weight': pet.weight,
-        'color': pet.color,
-        'images': pet.images,
+        'name': name,
+        'age': age,
+        'weight': weight,
+        'color': color,
+        'images': images,
       }),
     );
 
-    if (response.statusCode == 201) {
-      return true; // Pet cadastrado com sucesso
-    } else {
-      throw Exception('Falha ao cadastrar o pet');
+    if (response.statusCode != 201) {
+      throw Exception('Falha ao cadastrar o pet: ${response.body}');
     }
   }
 }
