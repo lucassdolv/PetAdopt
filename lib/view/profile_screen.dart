@@ -8,7 +8,7 @@ class ProfileScreen extends StatelessWidget {
 
   Future<String?> _getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('auth_token'); // Recupera o token salvo
+    return prefs.getString('auth_token');
   }
 
   Future<List<dynamic>> fetchUserPets() async {
@@ -37,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Perfil de Usuário"),
           centerTitle: true,
-          automaticallyImplyLeading: false, // Remove o botão de voltar padrão
+          automaticallyImplyLeading: false,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -47,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
               // Botão Voltar estilizado
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop(); // Voltar à tela anterior
+                  Navigator.of(context).pop();
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -61,10 +61,10 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent, // Fundo transparente
-                  shadowColor: Colors.transparent, // Remove a sombra
-                  elevation: 0, // Remove elevação
-                  padding: EdgeInsets.zero, // Remove padding
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
                 ),
               ),
               const Spacer(flex: 2),
@@ -72,7 +72,6 @@ class ProfileScreen extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    // Placeholder para imagem de perfil
                     const CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.black12,
@@ -102,7 +101,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              // Descrição do usuário
               const Text(
                 "Descrição do Usuário",
                 style: TextStyle(
@@ -144,7 +142,11 @@ class ProfileScreen extends StatelessWidget {
                           final pet = pets[index];
                           return ListTile(
                             leading: CircleAvatar(
-                              backgroundImage: NetworkImage(pet['images'][0]),
+                              backgroundImage: NetworkImage(
+                                pet['images']?.isNotEmpty == true
+                                    ? pet['images'][0]
+                                    : 'https://via.placeholder.com/150',
+                              ),
                             ),
                             title: Text(pet['name']),
                             subtitle: Text(

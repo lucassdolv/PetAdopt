@@ -5,6 +5,7 @@ class PetDescScreen extends StatelessWidget {
   final PetModel dog;
 
   const PetDescScreen({super.key, required this.dog});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,122 +26,47 @@ class PetDescScreen extends StatelessWidget {
                   elevation: 0,
                 ),
                 child: Row(
-                  children: [
+                  children: const [
                     Icon(Icons.chevron_left, color: Colors.black),
-                    Text("Voltar")
+                    Text("Voltar"),
                   ],
                 ),
               ),
-              // Imagem ocupando uma proporção menor da tela
+              // Imagem do pet
               SizedBox(
                 height: 380,
                 width: double.infinity,
-                child: Image.asset(
-                  "assets/images/HomeDog.png",
-                  fit: BoxFit.cover,
-                ),
+                child: dog.images.isNotEmpty
+                    ? Image.network(
+                        dog.images[0],
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(Icons.broken_image, size: 100),
+                      )
+                    : const Icon(Icons.image_not_supported, size: 100),
               ),
               const SizedBox(height: 10),
-              // Nome do animal centralizado e em negrito
-              const Center(
+              // Nome do animal
+              Center(
                 child: Text(
-                  "Nome do Animal",
-                  style: TextStyle(
+                  dog.name,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               const SizedBox(height: 20),
-              // Linha com 3 quadrados de informações
+              // Informações do pet
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Primeiro quadrado: Idade
-                  Container(
-                    width: 90, // Ajuste da largura
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.lightBlue.shade50,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Column(
-                      children: [
-                        Text(
-                          "Idade",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          "2 anos",
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Segundo quadrado: Peso
-                  Container(
-                    width: 90,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.lightBlue.shade50,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Column(
-                      children: [
-                        Text(
-                          "Peso",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          "10kg",
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Terceiro quadrado: Sexo
-                  Container(
-                    width: 90,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.lightBlue.shade50,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Column(
-                      children: [
-                        Text(
-                          "Sexo",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          "Macho",
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  _buildInfoBox("Idade", "${dog.age} anos"),
+                  _buildInfoBox("Peso", "${dog.weight}kg"),
                 ],
               ),
               const SizedBox(height: 20),
-              // Título descrição
+              // Descrição
               const Text(
                 "Descrição",
                 style: TextStyle(
@@ -149,18 +75,10 @@ class PetDescScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              // Descrição do animal
-              const Text(
-                "Este é um cão muito amigável e energético. Adora brincar e correr no parque. Está vacinado e pronto para adoção.",
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
               const SizedBox(height: 20),
-              // Botões de Adoção e Favoritar
+              // Botões
               Row(
                 children: [
-                  // Botão "Adotar" ocupa quase todo o espaço da linha
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
@@ -169,8 +87,7 @@ class PetDescScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 10), // Mantido o tamanho do padding
+                            horizontal: 20, vertical: 10),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -184,7 +101,7 @@ class PetDescScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 10), // Espaço entre os botões
+                  const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {
                       // Ação de favoritar
@@ -204,6 +121,35 @@ class PetDescScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildInfoBox(String label, String value) {
+    return Container(
+      width: 90,
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.lightBlue.shade50,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 3),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 14,
+            ),
+          ),
+        ],
       ),
     );
   }
