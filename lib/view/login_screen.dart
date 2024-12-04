@@ -18,7 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _authController = AuthController();
   final _formKey = GlobalKey<FormState>();
 
-  // Função para realizar o login
   Future<void> _login() async {
     if (_formKey.currentState?.validate() ?? false) {
       final email = _emailController.text;
@@ -27,7 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
       final token = await _authController.loginUser(email, password);
       
       if (token != null) {
-        // Armazenar o token com SharedPreferences
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('token', token); // Armazenando o token
 

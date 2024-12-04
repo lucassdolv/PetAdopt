@@ -27,19 +27,20 @@ class PetCardScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: Image.network(
-              dog.images.isNotEmpty ? dog.images[0] : "assets/images/default.png",
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 130,
-            ),
-          ),
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Image(
+                image: dog.images.isNotEmpty
+                    ? NetworkImage(dog.images[0])
+                    : AssetImage("assets/images/HomeDog.png"),
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 100,
+              )),
           const SizedBox(height: 8),
           Text(
-            "${dog.name}, ${dog.age} anos", 
+            "${dog.name}, ${dog.age} anos",
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -52,13 +53,14 @@ class PetCardScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => PetDescScreen(dog: dog), 
+                      builder: (context) => PetDescScreen(dog: dog),
                     ),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
