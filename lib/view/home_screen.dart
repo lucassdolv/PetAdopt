@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                     shadowColor: Colors.transparent,
                     elevation: 0,
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(

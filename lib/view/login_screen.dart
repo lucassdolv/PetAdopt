@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     elevation: 0,
                     padding: EdgeInsets.zero,
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.chevron_left, color: Colors.black),

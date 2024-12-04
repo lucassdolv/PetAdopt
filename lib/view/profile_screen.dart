@@ -49,6 +49,12 @@ class ProfileScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  elevation: 0,
+                  padding: EdgeInsets.zero,
+                ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: const [
@@ -60,19 +66,13 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  elevation: 0,
-                  padding: EdgeInsets.zero,
-                ),
               ),
               const Spacer(flex: 2),
               // Nome do usuário
-              Center(
+              const Center(
                 child: Column(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.black12,
                       child: Icon(
@@ -81,16 +81,16 @@ class ProfileScreen extends StatelessWidget {
                         color: Colors.black54,
                       ),
                     ),
-                    const SizedBox(height: 15),
-                    const Text(
+                    SizedBox(height: 15),
+                    Text(
                       "Nome do Usuário",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    const Text(
+                    SizedBox(height: 10),
+                    Text(
                       "emaildousuario@example.com",
                       style: TextStyle(
                         fontSize: 16,

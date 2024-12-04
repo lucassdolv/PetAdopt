@@ -15,7 +15,6 @@ class PetDescScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Botão de voltar
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -25,14 +24,14 @@ class PetDescScreen extends StatelessWidget {
                   shadowColor: Colors.transparent,
                   elevation: 0,
                 ),
-                child: Row(
-                  children: const [
+                child: const Row(
+                  children: [
                     Icon(Icons.chevron_left, color: Colors.black),
-                    Text("Voltar"),
+                    SizedBox(width: 5),
+                    Text("Voltar", style: TextStyle(color: Colors.black)),
                   ],
                 ),
               ),
-              // Imagem do pet
               SizedBox(
                 height: 380,
                 width: double.infinity,
@@ -46,7 +45,6 @@ class PetDescScreen extends StatelessWidget {
                     : const Icon(Icons.image_not_supported, size: 100),
               ),
               const SizedBox(height: 10),
-              // Nome do animal
               Center(
                 child: Text(
                   dog.name,
@@ -57,7 +55,6 @@ class PetDescScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              // Informações do pet
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -66,7 +63,6 @@ class PetDescScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              // Descrição
               const Text(
                 "Descrição",
                 style: TextStyle(
@@ -75,14 +71,19 @@ class PetDescScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
+              Text(
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                style: const TextStyle(
+                  fontSize: 12,
+                ),
+              ),
               const SizedBox(height: 20),
-              // Botões
               Row(
                 children: [
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        // Ação de adotar
+                        // Ação de adoção
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,

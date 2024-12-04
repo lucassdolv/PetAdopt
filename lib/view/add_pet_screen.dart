@@ -34,9 +34,9 @@ class AddPetScreen extends StatelessWidget {
                   elevation: 0,
                   padding: EdgeInsets.zero,
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     Icon(Icons.chevron_left, color: Colors.black),
                     SizedBox(width: 5),
                     Text(

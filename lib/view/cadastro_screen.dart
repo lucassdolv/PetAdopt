@@ -43,7 +43,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
     if (message == 'Usuário cadastrado com sucesso!') {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),  
+        MaterialPageRoute(builder: (context) => const LoginScreen()),  
       );
     }
   }
@@ -76,9 +76,9 @@ class _CadastroScreenState extends State<CadastroScreen> {
                     elevation: 0,
                     padding: EdgeInsets.zero,
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       Icon(Icons.chevron_left, color: Colors.black),
                       SizedBox(width: 5),
                       Text(

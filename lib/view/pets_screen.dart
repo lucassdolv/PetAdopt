@@ -58,7 +58,7 @@ class _PetsScreenState extends State<PetsScreen> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ProfileScreen()));
+                        builder: (context) => const ProfileScreen()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,

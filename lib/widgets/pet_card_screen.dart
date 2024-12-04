@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pet_adopt/model/pet_model.dart';
 import 'package:pet_adopt/view/pet_desc_screen.dart';
-import 'package:pet_adopt/view/pets_screen.dart';
 
 class PetCardScreen extends StatelessWidget {
   const PetCardScreen({
     super.key,
-    required this.dog,  // Passando o pet corretamente
+    required this.dog,
   });
 
-  final PetModel dog;  // Usando PetModel
+  final PetModel dog;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class PetCardScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 5.0),
             child: Image.network(
-              dog.images.isNotEmpty ? dog.images[0] : "assets/images/default.png",  // Exibe a primeira imagem
+              dog.images.isNotEmpty ? dog.images[0] : "assets/images/default.png",
               fit: BoxFit.cover,
               width: double.infinity,
               height: 130,
@@ -38,7 +37,7 @@ class PetCardScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            "${dog.name}, ${dog.age} anos",  // Exibindo nome e idade
+            "${dog.name}, ${dog.age} anos", 
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -53,7 +52,7 @@ class PetCardScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => PetDescScreen(dog: dog), // Passando o dog para a tela de detalhes
+                      builder: (context) => PetDescScreen(dog: dog), 
                     ),
                   );
                 },
